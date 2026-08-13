@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Performance Styled Complaints Form</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+      body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #e0f7fa, #e8f5e9);
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 480px;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        border-top: 5px solid #00bcd4;
+        transition: background-color 0.3s ease;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 26px;
+        color: #00796b;
+        margin-bottom: 25px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: #444;
+      }
+
+      input[type="text"],
+      textarea,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 1.5px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        box-sizing: border-box;
+        transition: border 0.3s, box-shadow 0.3s;
+        background-color: #f9f9f9;
+      }
+
+      input[type="text"]:focus,
+      textarea:focus,
+      select:focus {
+        border-color: #00acc1;
+        box-shadow: 0 0 6px rgba(0, 172, 193, 0.3);
+        outline: none;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      select {
+        appearance: none;
+        background: url('data:image/svg+xml;utf8,<svg fill="%23999" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+        background-size: 16px 16px;
+        background-color: #f9f9f9;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 14px;
+        background-color: #009688;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #00796b;
+        transform: translateY(-2px);
+      }
+
+      input, textarea, select, .container, input[type="submit"] {
+        transition: all 0.3s ease-in-out;
+      }
+
+      .status-indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin-left: 6px;
+        border-radius: 50%;
+        background-color: #ccc;
+        transition: background-color 0.3s;
+      }
+
+      .status-active {
+        background-color: #4caf50;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Complaints Form</h1>
+      <form method="post" action="/form">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="reg_no">Registration Number:</label>
+          <input type="text" id="reg_no" name="reg_no" required />
+        </div>
+
+        <div class="form-group">
+          <label for="com_type">Complaint Type:</label>
+          <input type="text" id="com_type" name="com_type" required />
+        </div>
+
+        <div class="form-group">
+          <label for="department">Department:</label>
+          <select id="department" name="department" required>
+            <option value="">Select Department</option>
+            <option value="cse">CSE</option>
+            <option value="it">IT</option>
+            <option value="eee">EEE</option>
+            <option value="ece">ECE</option>
+            <option value="ai&ml">AI&ML</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="complaint">Complaint:</label>
+          <textarea id="complaint" name="complaint" rows="5" required></textarea>
+        </div>
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
+</html>
