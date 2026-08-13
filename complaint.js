@@ -1,4 +1,4 @@
-// Complaint management applications
+// Complaint management application
 const express = require("express");
 
 const app = express();
