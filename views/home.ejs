@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Complaints Form and List</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 20px;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #343a40;
+        border-radius: 10px;
+        margin-bottom: 30px;
+      }
+
+      .navbar p {
+        color: #fff;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+
+      .navbar a button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      .navbar a button:hover {
+        background-color: #218838;
+      }
+
+      .filter {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .filter form {
+        display: inline-block;
+        font-size: 16px;
+      }
+
+      .filter select,
+      .filter button {
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+      }
+
+      .filter button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        margin-left: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      .filter button:hover {
+        background-color: #0056b3;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+
+      li {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: 420px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      li:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .cards p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .cards p strong {
+        font-weight: bold;
+      }
+
+      .tag {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        margin-top: 8px;
+      }
+
+      /* Department-specific tag colors */
+      .tag.cse  { background-color: #3b82f6; }
+      .tag.it   { background-color: #06b6d4; }
+      .tag.eee  { background-color: #f59e0b; }
+      .tag.ece  { background-color: #10b981; }
+      .tag.aiml { background-color: #8b5cf6; }
+
+      .like-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+
+      .like-button button {
+        background-color: transparent;
+        border: none;
+        color: #ff4757;
+        font-size: 24px;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .like-button button:hover {
+        transform: scale(1.2);
+      }
+
+      .like-button p {
+        margin-left: 10px;
+        font-size: 16px;
+        color: #333;
+      }
+
+      @media (max-width: 768px) {
+        li {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="navbar">
+        <p>Complaints Form</p>
+        <a href="/form">
+          <button>Complaint</button>
+        </a>
+      </div>
+    </div>
+
+    <div class="filter">
+      <form method="POST" action="/filter">
+        <label for="department">Filter by Department:</label>
+        <select name="filtervalue" id="department">
+          <option value="all">All Departments</option>
+          <option value="cse">CSE</option>
+          <option value="it">IT</option>
+          <option value="eee">EEE</option>
+          <option value="ece">ECE</option>
+          <option value="ai&ml">AI&ML</option>
+        </select>
+        <button type="submit">Filter</button>
+      </form>
+    </div>
+
+    <div class="cards">
+      <% if (complaints && complaints.length > 0) { %>
+      <ul>
+        <% complaints.forEach(function(complaint) { 
+             const deptClass = complaint.department.toLowerCase().replace(/[^a-z0-9]/g, ''); %>
+        <li>
+          <p><strong>Name:</strong> <%= complaint.name %></p>
+          <p><strong>Reg No:</strong> <%= complaint.reg_no %></p>
+          <p><strong>Complaint Type:</strong> <%= complaint.com_type %></p>
+          <p><strong>Department:</strong> 
+            <span class="tag <%= deptClass %>"><%= complaint.department %></span>
+          </p>
+
+          <div class="like-button">
+            <form action="/like/<%= complaint._id %>" method="post">
+              <button type="submit">&hearts;</button>
+            </form>
+            <p><strong><%= complaint.likes || 0 %></strong></p>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+      <% } else { %>
+      <p style="text-align:center;">No complaints submitted yet.</p>
+      <% } %>
+    </div>
+  </body>
+</html>
