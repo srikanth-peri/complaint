@@ -1,3 +1,4 @@
+// Complaint management application
 const express = require("express");
 const app = express();
 const bp = require("body-parser");
