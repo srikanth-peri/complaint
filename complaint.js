@@ -25,7 +25,7 @@ async function connectToDB() {
       await dbClient.connect();
       console.log("✅ Connected to MongoDB");
     } catch (error) {
-      console.error("❌ MongoDB connection failed:", error);
+      console.error("❌ MongoDB  failed:", error);
       process.exit(1);
     }
   }
